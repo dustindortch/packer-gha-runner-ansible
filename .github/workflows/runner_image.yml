@@ -1,0 +1,56 @@
+---
+name: Workflow for building GitHub Actions self-hosted runner image
+
+on:
+  workflow_dispatch:
+    paths: [ 'runner_image/**' ]
+
+permissions:
+  id-token: write
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  packer_build:
+    name: Packer Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./runner_image
+    environment:
+      name: Production
+    env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      ARM_TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
+      ARM_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+      PERSONAL_ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      USER: ${{secrets.GITHUB_ACTIONS_RUNNER_USER}}
+      GITHUB_ACTIONS_RUNNER_TLS_NO_VERIFY: 1
+      DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER: 0
+      GITHUB_ACCOUNT: ${{secrets.GITHUB_ACCOUNT}}
+      GITHUB_REPO: ${{secrets.GITHUB_REPO}}
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with: 
+          version: "1.8.3"
+
+      - name: Packer Init
+        id: init
+        run: packer init .
+
+      - name: Packer Validate
+        id: validate
+        run: packer validate .
+
+      - name: Packer Build
+        id: build
+        run: packer build .
