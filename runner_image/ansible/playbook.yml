@@ -11,8 +11,6 @@
       - name: runner
         comment: GitHub Actions runner account
         shell: /bin/bash
-        groups:
-          - sudo
         system: yes
     hide_sensitive_logs: true
     packages:
