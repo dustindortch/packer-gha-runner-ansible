@@ -17,7 +17,7 @@ SSH_CFG=${SSH_DIR}/config
 mkdir -p $SSH_DIR
 chmod 700 $SSH_DIR
 
-cat << EOF > $SSH_CFG
+cat << 'EOF' > $SSH_CFG
 Host 127.0.0.1
   PubkeyAcceptedAlgorithms +ssh-rsa
   HostkeyAlgorithms +ssh-rsa
