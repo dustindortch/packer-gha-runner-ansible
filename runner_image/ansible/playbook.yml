@@ -5,8 +5,8 @@
   hosts: all
 
   vars:
-    github_account: "{{lookup('ansible.builtin.env','GHA_ACCOUNT')}}"
-    github_repo: "{{lookup('ansible.builtin.env','GHA_REPO')}}"
+    github_account: "{{lookup('ansible.builtin.env','GITHUB_ACCOUNT')}}"
+    github_repo: "{{lookup('ansible.builtin.env','GITHUB_REPO')}}"
     user_management:
       - name: runner
         comment: GitHub Actions runner account
