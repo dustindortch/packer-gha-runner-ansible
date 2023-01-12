@@ -14,7 +14,7 @@ permissions:
 jobs:
   packer_build:
     name: Packer Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: ./runner_image
