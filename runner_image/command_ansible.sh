@@ -12,16 +12,16 @@ deprecation_warnings = False
 nocows = 1
 EOF
 
-SSH_DIR=~/.ssh
-SSH_CFG=${SSH_DIR}/config
-mkdir -p $SSH_DIR
-chmod 700 $SSH_DIR
-cat $SSH_CFG
+# SSH_DIR=~/.ssh
+# SSH_CFG=${SSH_DIR}/config
+# mkdir -p $SSH_DIR
+# chmod 700 $SSH_DIR
+# cat $SSH_CFG
 
-cat << EOF > $SSH_CFG
-Host 127.0.0.1
-  PubkeyAcceptedAlgorithms +ssh-rsa
-  HostkeyAlgorithms +ssh-rsa
-EOF
+# cat << EOF > $SSH_CFG
+# Host 127.0.0.1
+#   PubkeyAcceptedAlgorithms +ssh-rsa
+#   HostkeyAlgorithms +ssh-rsa
+# EOF
 
 ansible-playbook "$@"
