@@ -51,6 +51,7 @@ build {
     ]
 
     # extra_arguments = ["-vvv"]
+    ansible_ssh_extra_args = ["-oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedKeyTypes=+ssh-rsa -o IdentitiesOnly=yes"]
     extra_arguments = ["--scp-extra-args", "'-O'"]
   }
 }
