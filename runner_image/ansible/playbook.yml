@@ -50,5 +50,5 @@
         cmd: update-crypto-policies --set DEFAULT:SHA1
 
   roles:
-    - role: monolithprojects.github_actions_runner
     - role: monolithprojects.user_management
+    - role: monolithprojects.github_actions_runner
