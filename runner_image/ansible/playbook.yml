@@ -5,8 +5,15 @@
   hosts: all
 
   vars:
-    github_account: "{{lookup('ansible.builtin.env','GITHUB_ACCOUNT')}}"
-    github_repo: "{{lookup('ansible.builtin.env','GITHUB_REPO')}}"
+    github_account: "{{lookup('ansible.builtin.env','GHA_ACCOUNT')}}"
+    github_repo: "{{lookup('ansible.builtin.env','GHA_REPO')}}"
+    user_management:
+      - name: runner
+        comment: GitHub Actions runner account
+        shell: /bin/bash
+        groups:
+          - sudo
+        system: yes
     hide_sensitive_logs: true
     packages:
       - gcc
